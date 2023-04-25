@@ -3,11 +3,12 @@ import java.awt.Dimension;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.lang.Math;
 public class LoadingPanel extends JPanel{
-    private int timesPerSecond;
+    private double timesPerSecond;
     private int x, y, width, height;
     /**
-     * Constructor for the class
+     * Default constructor for the class
      */
     public LoadingPanel(){
         this.setBackground(Color.WHITE);
@@ -16,12 +17,43 @@ public class LoadingPanel extends JPanel{
         this.y = 5; // not to be changed
         this.height = 40; // not to be changed
         this.width = 0; // to be incremented
-        this.timesPerSecond = 10;
-        Timer timer = new Timer(1000/timesPerSecond, new ActionListener(){
+        this.timesPerSecond = 10; // the default amount of time
+        Timer timer = new Timer(1000/(int)timesPerSecond, new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
 				repaint();
-                if(width == 390){width = 0;}
+                if(width == 390){
+                    System.out.println("LOADED!");
+                    System.exit(0);
+                }
+                width = width + 1;
+			}
+		});
+		timer.start();
+    }
+    /**
+     * Constructor for when terminal arguments are present
+     * @param s the number of minutes for the loading bar to take to complete
+     */
+    public LoadingPanel(String s){
+        this.setBackground(Color.WHITE);
+        this.setPreferredSize(new Dimension(400, 50));
+        this.x = 5; // not to be changed
+        this.y = 5; // not to be changed
+        this.height = 40; // not to be changed
+        this.width = 0; // to be incremented
+        int minutes = Integer.parseInt(s);
+        this.timesPerSecond = ((double)minutes * 60) / 390;
+        int delay = (int)Math.floor(1000 * this.timesPerSecond); // how often the timer activates
+        System.out.println(delay);
+        Timer timer = new Timer(delay, new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				repaint();
+                if(width == 390){
+                    System.out.println("LOADED!");
+                    System.exit(0);
+                }
                 width = width + 1;
 			}
 		});
