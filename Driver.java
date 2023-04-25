@@ -15,6 +15,7 @@ public class Driver{
         frame.setVisible(true);
         frame.add(lp);
         frame.pack();
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

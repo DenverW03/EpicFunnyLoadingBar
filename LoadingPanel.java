@@ -10,18 +10,19 @@ public class LoadingPanel extends JPanel{
      * Constructor for the class
      */
     public LoadingPanel(){
-        this.setBackground(Color.BLUE);
+        this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(400, 50));
         this.x = 5; // not to be changed
         this.y = 5; // not to be changed
         this.height = 40; // not to be changed
         this.width = 0; // to be incremented
-        this.timesPerSecond = 5;
+        this.timesPerSecond = 10;
         Timer timer = new Timer(1000/timesPerSecond, new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-
 				repaint();
+                if(width == 390){width = 0;}
+                width = width + 1;
 			}
 		});
 		timer.start();
@@ -32,7 +33,7 @@ public class LoadingPanel extends JPanel{
     @Override
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-        g.setColor(new Color(255, 255, 255));
+        g.setColor(Color.RED);
         DrawBar(g);
 	}
     /**
