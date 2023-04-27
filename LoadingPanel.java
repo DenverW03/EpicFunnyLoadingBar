@@ -45,7 +45,6 @@ public class LoadingPanel extends JPanel{
         int minutes = Integer.parseInt(s);
         this.timesPerSecond = ((double)minutes * 60) / 390;
         int delay = (int)Math.floor(1000 * this.timesPerSecond); // how often the timer activates
-        System.out.println(delay);
         Timer timer = new Timer(delay, new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
